@@ -1,17 +1,18 @@
 #include "stack.h"
 
-stack* alloc_stack(stack* st)
+stack* alloc_stack()
 {
-	st = malloc(sizeof(stack));
+	stack* st = malloc(sizeof(stack));
+	st->head = malloc(sizeof(node));
+	st->tail = st->head;
 	st->head->next = st->tail;
-	st->head->data = malloc(sizeof(void));
 	return st;
 }
 void free_stack(stack* st)
 {
 	node* tmp = st->head;
 	while(st->head->next)
-	{	
+	{
 		tmp = st->head->next;
 		free(st->head);
 		st->head = tmp;
