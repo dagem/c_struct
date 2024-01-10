@@ -7,12 +7,12 @@
 
 typedef struct node{
 	void *data;
-	struct node* next;
+	struct node* prev;
 }node;
 
 typedef struct stack{
-	node* head;
-	node* tail;
+	node* top;
+	node* bottom;
 }stack;
 
 stack* alloc_stack();
