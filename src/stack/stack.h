@@ -13,6 +13,7 @@ typedef struct node{
 typedef struct stack{
 	node* top;
 	node* bottom;
+	int size;
 }stack;
 
 stack* alloc_stack();

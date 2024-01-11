@@ -3,52 +3,59 @@
 stack* alloc_stack()
 {
 	stack* st = malloc(sizeof(stack));
-	st->head = malloc(sizeof(node));
-	st->tail = st->head;
-	st->head->prev = st->tail;
+	st->top = malloc(sizeof(node));
+	st->bottom = st->top;
+	st->top->prev = st->bottom;
+	st->size = 0;
 	return st;
 }
 void free_stack(stack* st)
 {
-	node* tmp = st->head;
-	while(st->head->prev)
+	node* tmp = st->top;
+	while(st->top->prev)
 	{
-		tmp = st->head->prev;
-		free(st->head);
-		st->head = tmp;
+		tmp = st->top->prev;
+		free(st->top);
+		st->top = tmp;
 	}
 }
 void push(stack *st, void* data)
 {
-	if(!st->head)
+	if(!st->top)
 	{
-		st->head = malloc(sizeof(node*));
-		st->head->data = data;
-		st->head->prev = NULL;
+		st->top = malloc(sizeof(node*));
+		st->top->data = data;
+		st->top->prev = NULL;
+		st->size++;
 	}
 	node* tmp = malloc(sizeof(node*));
 	tmp->data = data;
-	tmp->prev = st->head;
-	
-	st->head = tmp;
+	tmp->prev = st->top;
+
+	st->top = tmp;
+	st->size++;
 }
 void* peek(stack* st)
 {
-	return st->head->data;
+	return st->top->data;
 }
 
 void* pop(stack* st)
 {
-	if(st->head->prev == NULL)
+	if(st->top->prev == NULL)
 	{
-		void* tmp_data = st->head->data;
+		void* tmp_data = st->top->data;
 		st = malloc(sizeof(stack));
+		st->size = 0;
 		return tmp_data;
 	}
 	else
 	{
-		void* tmp_data = st->head->data;
-		st->head = st->head->prev;
+		void* tmp_data = st->top->data;
+		st->top = st->top->prev;
+		st->size--;
 		return tmp_data;
 	}
 }
+
+
