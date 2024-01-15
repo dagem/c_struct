@@ -12,12 +12,11 @@ typedef struct node{
 
 typedef struct stack{
 	node* top;
-	node* bottom;
 	int size;
 }stack;
 
 stack* alloc_stack();
-void create_node();
+node* create_node();
 
 void* pop(stack* st);
 void* peek(stack* st);
