@@ -16,7 +16,7 @@ typedef struct stack{
 }stack;
 
 stack* alloc_stack();
-node* create_node();
+node*  alloc_node();
 
 void* pop(stack* st);
 void* peek(stack* st);

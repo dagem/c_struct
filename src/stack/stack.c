@@ -3,11 +3,11 @@
 stack* alloc_stack()					//responsible for allocating memory for the stack.
 {
 	stack* st = malloc(sizeof(stack));		//allocating the memory for the stack.
-	st->top = create_node();			//allocates memory for the stack's top node.
+	st->top = alloc_node();				//allocates memory for the stack's top node.
 	st->size = 0;					//sets the size of the stack to 0.
 	return st;					//returns our stack node.
 }
-node* create_node()
+node* alloc_node()
 {
 	node* new_node = malloc(sizeof(node));		//allocates memory for a node.
 	new_node->prev = NULL;				//we set prev to NULL in case that it is the first node of our stack.
@@ -33,7 +33,7 @@ void push(stack *st, void* udata)
 		st->top->data = udata;          //sets the top of the stack's data to be our given data.
 		st->size++;                     //increments the size.
 	}
-	node* new_node = create_node();         //since we have a stack node, we add nodes "on top" of it.
+	node* new_node = alloc_node();          //since we have a stack node, we add nodes "on top" of it.
 	new_node->data = udata;			//sets the data for our node.
 	new_node->prev = st->top;		//assigns the new node's previous node to be the current top node.
 
