@@ -20,7 +20,7 @@ node* create_node();
 
 void* pop(stack* st);
 void* peek(stack* st);
-void push(stack* st, void* data);
+void push(stack* st, void* udata);
 
 void free_stack(stack *st);
 #endif /*__STACK_H__*/
