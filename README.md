@@ -1,2 +1,2 @@
 # c_struct
-data structures in c
+A data strucutre library written in C
