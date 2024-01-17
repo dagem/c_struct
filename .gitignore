@@ -1,3 +1,4 @@
 /src/stack/main.c
 *.exe
 *.out
+/src/llist/main.c
