@@ -3,7 +3,7 @@
 llist* alloc_llist()
 {
 	llist* new_list = malloc(sizeof(llist));
-	new_list->head = alloc_node(); // maybe not null
+	new_list->head = alloc_node(); //maybe not null
 	new_list->tail = alloc_node();
 	new_list->size = 0;
 
@@ -31,8 +31,17 @@ void prepend(llist* list, void* udata)
 	new_node->data = udata;
 	new_node->next = list->head;
 
-	list->head = new_node;
-	list->size++;
+	if(list->size == 1)
+	{
+		list->head = new_node;
+		list->tail = list->head->next;
+		list->size++;
+	}
+	else
+	{
+		list->head = new_node;
+		list->size++;
+	}
 }
 void append(llist* list, void* udata)
 {
@@ -40,8 +49,23 @@ void append(llist* list, void* udata)
 	{
 		prepend(list, udata);
 	}
+	if(list->size == 1)
+	{
+		node* new_node = alloc_node();
+		new_node->data = udata;
+		new_node->next = NULL;
+
+		list->head->next = new_node;
+		list->tail = new_node;
+		list->size++;
+	}
 	node* new_node = alloc_node();
 	new_node->data = udata;
-	new_node->next = NULL;
-	list->tail = new_node;
+
+	list->tail->next = new_node;
+	list->tail = list->tail->next;
+	list->size++;
+}
+void insert(llist* list, void* udata, int upos)
+{
 }
