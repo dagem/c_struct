@@ -16,12 +16,23 @@ node* alloc_node()
 
 	return new_node;
 }
+void free_llist(llist* list)
+{
+	node* free_node = NULL;
+
+	while(list->head)
+	{
+		free_node = list->head->next;
+		free(list->head);
+		list->head = free_node;
+	}
+	free(list);
+}
 
 void prepend(llist* list, void* udata)
 {
 	if(!list->head)
 	{
-		list = alloc_llist(); //list doesn't exist make one.
 		list->head = alloc_node(); //allocate mem for head.
 		list->head->data = udata; //assign udata to head node.
 		list->tail = list->head; //assign tail to head, 1 node.
