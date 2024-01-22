@@ -98,6 +98,6 @@ void* pop(llist* list, int upos)
 		return rdata;
 	}
 }
-void* peek(llist* list, void* udata, int upos)
+void* peek(llist* list, int upos)
 {
 }

@@ -28,5 +28,5 @@ void insert(llist* list, void* data, int upos);
 void update(llist* list, void* data, int upos);
 
 void* pop(llist* list, int upos);
-void* peek(llist* list, void* data, int upos);
+void* peek(llist* list, int upos);
 #endif /*__HEADERS_H__*/
