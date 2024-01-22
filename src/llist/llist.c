@@ -80,3 +80,24 @@ void append(llist* list, void* udata)
 void insert(llist* list, void* udata, int upos)
 {
 }
+void update(llist* list, void* udata, int upos)
+{
+}
+void* pop(llist* list, int upos)
+{
+	node* free_node = NULL;
+	void* rdata = list->head->data;
+	if(upos == 0)
+	{
+		free_node = list->head->next;
+		free(list->head);
+
+		list->head = free_node;
+		list->size--;
+
+		return rdata;
+	}
+}
+void* peek(llist* list, void* udata, int upos)
+{
+}

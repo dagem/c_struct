@@ -21,11 +21,12 @@ typedef struct llist
 llist* alloc_llist();
 node*  alloc_node();
 
+void free_llist(llist* list);
 void prepend(llist* list, void* data);
 void append(llist* list, void* data);
-void insert(llist* list, void* data, int pos);
-void update(llist* list, void* data, int pos);
-//void* remove(llist* list, void* data, int pos);
+void insert(llist* list, void* data, int upos);
+void update(llist* list, void* data, int upos);
 
-void free_llist(llist* list);
+void* pop(llist* list, int upos);
+void* peek(llist* list, void* data, int upos);
 #endif /*__HEADERS_H__*/
