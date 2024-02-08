@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "../headers/stack.h"
 
 stack* alloc_stack()					//responsible for allocating memory for the stack.
 {

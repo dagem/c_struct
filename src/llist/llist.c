@@ -1,4 +1,4 @@
-#include "llist.h"
+#include "../headers/llist.h"
 
 llist* alloc_llist()
 {
@@ -37,16 +37,19 @@ void prepend(llist* list, void* udata)
 		list->head->data = udata; //assign udata to head node.
 		list->tail = list->head; //assign tail to head, 1 node.
 		list->size++;
+		list->tail->pos = 0;
 	}
 	node* new_node = alloc_node();
 	new_node->data = udata;
 	new_node->next = list->head;
+	new_node->next->pos++;
 
 	if(list->size == 1)
 	{
 		list->head = new_node;
 		list->tail = list->head->next;
 		list->size++;
+		list->tail->pos = 1;
 	}
 	else
 	{
@@ -69,9 +72,11 @@ void append(llist* list, void* udata)
 		list->head->next = new_node;
 		list->tail = new_node;
 		list->size++;
+		list->tail->pos = 1;
 	}
 	node* new_node = alloc_node();
 	new_node->data = udata;
+	new_node->pos = list->size;
 
 	list->tail->next = new_node;
 	list->tail = list->tail->next;
