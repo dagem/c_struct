@@ -103,6 +103,41 @@ void append(llist* list, void* udata)
 }
 void insert(llist* list, void* udata, int upos)
 {
+	if(upos < 0 || upos > list->size)
+	{
+		printf("Position out of bounds\n");
+	}
+	else if(!list->head)
+	{
+		prepend(list, udata);
+	}
+	else if(list->size < 2)
+	{
+		append(list, udata);
+	}
+	else
+	{
+		node* new_node = alloc_node();
+		new_node->data = udata;
+		new_node->pos = upos;
+
+		llist accessor_list = *list;
+		for(int i = 0; i < upos-1; i++)
+		{
+			accessor_list.head = accessor_list.head->next;
+		}
+		new_node->next = accessor_list.head->next;
+		accessor_list.head->next = new_node;
+		accessor_list.head = accessor_list.head->next;
+		accessor_list.head = accessor_list.head->next;
+
+		while(accessor_list.head)
+		{
+			accessor_list.head->pos++;
+			accessor_list.head = accessor_list.head->next;
+		}
+		list->size++;
+	}
 }
 void update(llist* list, void* udata, int upos)
 {
