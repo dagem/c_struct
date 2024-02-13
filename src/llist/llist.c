@@ -3,8 +3,8 @@
 llist* alloc_llist()
 {
 	llist* new_list = malloc(sizeof(llist));
-	new_list->head = alloc_node(); //maybe not null
-	new_list->tail = alloc_node();
+	new_list->head = NULL;
+	new_list->tail = NULL;
 	new_list->size = 0;
 
 	return new_list;
@@ -12,7 +12,6 @@ llist* alloc_llist()
 node* alloc_node()
 {
 	node* new_node = malloc(sizeof(node));
-	new_node->next = NULL;
 
 	return new_node;
 }
@@ -33,55 +32,34 @@ void prepend(llist* list, void* udata)
 {
 	if(!list->head)
 	{
-		list->head = alloc_node(); //allocate mem for head.
-		list->head->data = udata; //assign udata to head node.
-		list->tail = list->head; //assign tail to head, 1 node.
-		list->size++;
-		list->tail->pos = 0;
+		node* new_node = alloc_node();
+		new_node->data = udata; //assign udata to head node.
+		new_node->next = NULL;  //make the final node empty
+		new_node->pos  = 0;
+		list->head = new_node;  //assign to head, 1 node.
+		list->tail = new_node;  //assign to tail, 1 node.
+		list->size++;		//increment the size;
 	}
-	node* new_node = alloc_node();
-	new_node->data = udata;
-	new_node->next = list->head;
-	new_node->next->pos++;
-
-	if(list->size == 1)
+	else if(list->size < 2)
 	{
+		node* new_node = alloc_node();
+		new_node->data = udata;
+		new_node->pos = 0;
+		list->head->pos = 1;
+		new_node->next = list->head;
 		list->head = new_node;
+		list->size++;
 		list->tail = list->head->next;
-		list->size++;
-		list->tail->pos = 1;
-	}
-	else
-	{
-		list->head = new_node;
-		list->size++;
+		list->tail->next = NULL;
 	}
 }
 void append(llist* list, void* udata)
 {
-	if(!list->head)
+/*	if(!list->head)
 	{
 		prepend(list, udata);
 	}
-	if(list->size == 1)
-	{
-		node* new_node = alloc_node();
-		new_node->data = udata;
-		new_node->next = NULL;
-
-		list->head->next = new_node;
-		list->tail = new_node;
-		list->size++;
-		list->tail->pos = 1;
-	}
-	node* new_node = alloc_node();
-	new_node->data = udata;
-	new_node->pos = list->size;
-
-	list->tail->next = new_node;
-	list->tail = list->tail->next;
-	list->size++;
-}
+*/}
 void insert(llist* list, void* udata, int upos)
 {
 }
@@ -105,4 +83,10 @@ void* pop(llist* list, int upos)
 }
 void* peek(llist* list, int upos)
 {
+	llist copy = *list;
+	for(int i = 0; i < upos+1; i++)
+	{
+		copy.head = copy.head->next;
+	}
+	return copy.head->data;
 }
