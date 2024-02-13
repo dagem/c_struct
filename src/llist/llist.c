@@ -90,14 +90,10 @@ void append(llist* list, void* udata)
 		node* new_node = alloc_node();
 		new_node->data = udata;
 		new_node->pos = list->tail->pos + 1;
+		new_node->next = NULL;
 
-		llist accessor_list = *list;
-		while(accessor_list.head->next)
-		{
-			accessor_list.head = accessor_list.head->next;
-		}
-		accessor_list.head->next = new_node;
-		list->tail = new_node;
+		list->tail->next = new_node;
+		list->tail = list->tail->next;
 		list->size++;
 	}
 }
