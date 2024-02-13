@@ -106,6 +106,12 @@ void insert(llist* list, void* udata, int upos)
 }
 void update(llist* list, void* udata, int upos)
 {
+	llist accessor_list = *list;
+	for(int i = 0; i < upos; i++)
+	{
+		accessor_list.head = accessor_list.head->next;
+	}
+	accessor_list.head->data = udata;
 }
 void* pop(llist* list, int upos)
 {
