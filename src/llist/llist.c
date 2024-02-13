@@ -128,8 +128,7 @@ void insert(llist* list, void* udata, int upos)
 		}
 		new_node->next = accessor_list.head->next;
 		accessor_list.head->next = new_node;
-		accessor_list.head = accessor_list.head->next;
-		accessor_list.head = accessor_list.head->next;
+		accessor_list.head = accessor_list.head->next->next;
 
 		while(accessor_list.head)
 		{
