@@ -52,14 +52,55 @@ void prepend(llist* list, void* udata)
 		list->tail = list->head->next;
 		list->tail->next = NULL;
 	}
+	else
+	{
+		node* new_node = alloc_node();
+		new_node->data = udata;
+		new_node->pos = 0;
+
+		llist accessor_list = *list; //creates a non-pointer list which allows us to update each node pointer's position value
+		while(accessor_list.head)
+		{
+			accessor_list.head->pos++;
+			accessor_list.head = accessor_list.head->next;
+		}
+		new_node->next = list->head;
+		list->head = new_node;
+		list->size++;
+	}
 }
 void append(llist* list, void* udata)
 {
-/*	if(!list->head)
+	if(!list->head)
 	{
 		prepend(list, udata);
 	}
-*/}
+	else if(list->size < 2)
+	{
+		node* new_node = alloc_node();
+		new_node->data = udata;
+		new_node->pos = list->head->pos + 1;
+		new_node->next = NULL;
+		list->head->next = new_node;
+		list->tail = new_node;
+		list->size++;
+	}
+	else
+	{
+		node* new_node = alloc_node();
+		new_node->data = udata;
+		new_node->pos = list->tail->pos + 1;
+
+		llist accessor_list = *list;
+		while(accessor_list.head->next)
+		{
+			accessor_list.head = accessor_list.head->next;
+		}
+		accessor_list.head->next = new_node;
+		list->tail = new_node;
+		list->size++;
+	}
+}
 void insert(llist* list, void* udata, int upos)
 {
 }
