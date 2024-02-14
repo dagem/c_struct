@@ -97,7 +97,7 @@ void append(llist* list, void* udata)
 		list->size++;
 	}
 }
-void insert(llist* list, void* udata, int upos)
+void insert(llist* list, void* udata, unsigned int upos)
 {
 	if(upos < 0 || upos > list->size)
 	{
@@ -134,7 +134,7 @@ void insert(llist* list, void* udata, int upos)
 		list->size++;
 	}
 }
-void update(llist* list, void* udata, int upos)
+void update(llist* list, void* udata, unsigned int upos)
 {
 	llist accessor_list = *list;
 	for(int i = 0; i < upos; i++)
@@ -143,7 +143,7 @@ void update(llist* list, void* udata, int upos)
 	}
 	accessor_list.head->data = udata;
 }
-void* pop(llist* list, int upos)
+void* pop(llist* list, unsigned int upos)
 {
 	node* free_node = NULL;
 	void* rdata = list->head->data;
@@ -158,7 +158,7 @@ void* pop(llist* list, int upos)
 		return rdata;
 	}
 }
-void* peek(llist* list, int upos)
+void* peek(llist* list, unsigned int upos)
 {
 	llist copy = *list;
 	for(int i = 0; i < upos+1; i++)
