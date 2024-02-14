@@ -101,9 +101,18 @@ void append(llist* list, void* udata)
 }
 void insert(llist* list, void* udata,  int upos)
 {
-	if(upos < 0 || upos > list->size)
+	if(upos < 0)
 	{
-		printf("Position out of bounds\n");
+		printf("Position out of bounds, request ignored.\n");
+	}
+	else if(upos > list->size)
+	{
+		//we add nodes till we hit the position
+		for(int i = list->size; i < upos-1; i++)
+		{
+			append(list, NULL);
+		}
+		append(list, udata);
 	}
 	else if(!list->head)
 	{
@@ -118,52 +127,23 @@ void insert(llist* list, void* udata,  int upos)
 		node* new_node = alloc_node();
 		new_node->data = udata;
 
-		llist accessor_list = *list;
-		for(int i = 0; i < upos-1; i++)
-		{
-			accessor_list.head = accessor_list.head->next;
-		}
-		new_node->next = accessor_list.head->next;
-		accessor_list.head->next = new_node;
-		accessor_list.head = accessor_list.head->next->next;
+		new_node->next = traverse(list, upos);
 
-		while(accessor_list.head)
-		{
-			accessor_list.head = accessor_list.head->next;
-		}
+		traverse(list, upos-1)->next = new_node; //updates the user position node to be our new one
+		traverse(list, upos)->next = traverse(list, upos+1); //moves everything after the user position over
+
 		list->size++;
+
 	}
-}
-void update(llist* list, void* udata,  int upos)
-{
-	llist accessor_list = *list;
-	for(int i = 0; i < upos; i++)
-	{
-		accessor_list.head = accessor_list.head->next;
-	}
-	accessor_list.head->data = udata;
 }
 void* pop(llist* list, int upos)
 {
-	node* free_node = NULL;
-	void* rdata = list->head->data;
-	if(upos == 0)
-	{
-		free_node = list->head->next;
-		free(list->head);
-
-		list->head = free_node;
-		list->size--;
-
-		return rdata;
-	}
+}
+void update(llist* list, void* udata,  int upos)
+{
+	traverse(list, upos)->data = udata;
 }
 void* peek(llist* list,  int upos)
 {
-	llist copy = *list;
-	for(int i = 0; i < upos+1; i++)
-	{
-		copy.head = copy.head->next;
-	}
-	return copy.head->data;
+	return traverse(list, upos)->data;
 }
