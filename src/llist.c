@@ -52,6 +52,7 @@ void prepend(llist* list, void* udata)
 		node* new_node = alloc_node();
 		new_node->data = udata;
 		new_node->next = list->head;
+
 		list->head = new_node;
 		list->size++;
 		list->tail = list->head->next;
@@ -61,13 +62,8 @@ void prepend(llist* list, void* udata)
 	{
 		node* new_node = alloc_node();
 		new_node->data = udata;
-
-		llist accessor_list = *list; //creates a non-pointer list which allows us to update each node pointer's position value
-		while(accessor_list.head)
-		{
-			accessor_list.head = accessor_list.head->next;
-		}
 		new_node->next = list->head;
+
 		list->head = new_node;
 		list->size++;
 	}
