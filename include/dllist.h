@@ -18,8 +18,8 @@ typedef struct dllist
 	node* tail;
 }dllist;
 
-dllist* alloc_list();
-node* alloc_node();
+dllist* alloc_dllist();
+node* alloc_dlnode();
 
 void prepend(dllist* list, void* udata);
 void append(dllist* list, void* udata);
