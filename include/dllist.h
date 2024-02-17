@@ -18,7 +18,17 @@ typedef struct dllist
 	node* tail;
 }dllist;
 
-int prepend(dllist list, void* data);
-int append(dllist list, void* data);
+dllist* alloc_list();
+node* alloc_node();
+
+void prepend(dllist* list, void* udata);
+void append(dllist* list, void* udata);
+void insert(dllist* list, void* udata);
+void* pop(dllist* list, unsigned int pos);
+void update(dllist* list, void* udata, unsigned int pos);
+node* forward(dllist* list, unsigned int pos);
+node* backward(dllist* list, unsigned int pos);
+
+void free_dllist(dllist* list);
 
 #endif /*__DLLIST_H__*/

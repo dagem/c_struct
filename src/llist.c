@@ -28,7 +28,7 @@ void free_llist(llist* list)
 	free(list);
 }
 //traverses the list in O(n) time
-node* traverse(llist* list, int upos)
+node* traverse(llist* list, unsigned int upos)
 {
 	llist accessor_list = *list;
 	for(int i = 0; i < upos; i++)
@@ -96,7 +96,7 @@ void append(llist* list, void* udata)
 		list->size++;
 	}
 }
-void insert(llist* list, void* udata,  int upos)
+void insert(llist* list, void* udata, unsigned int upos)
 {
 	if(upos < 0)
 	{
@@ -133,7 +133,7 @@ void insert(llist* list, void* udata,  int upos)
 
 	}
 }
-void* pop(llist* list, int upos)
+void* pop(llist* list, unsigned int upos)
 {
 
 	node old_node = *traverse(list,upos);
@@ -149,11 +149,11 @@ void* pop(llist* list, int upos)
 	return old_node.data;
 
 }
-void update(llist* list, void* udata,  int upos)
+void update(llist* list, void* udata, unsigned int upos)
 {
 	traverse(list, upos)->data = udata;
 }
-void* peek(llist* list,  int upos)
+void* peek(llist* list, unsigned int upos)
 {
 	return traverse(list, upos)->data;
 }

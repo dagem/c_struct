@@ -21,14 +21,14 @@ typedef struct llist
 llist* alloc_llist();
 node*  alloc_node();
 
-node* traverse(llist* list, int upos);
+node* traverse(llist* list, unsigned int upos);
 void free_llist(llist* list);
 void prepend(llist* list, void* data);
 void append(llist* list, void* data);
-void insert(llist* list, void* data, int upos);
-void update(llist* list, void* data, int upos);
+void insert(llist* list, void* data, unsigned int upos);
+void update(llist* list, void* data, unsigned int upos);
 
-void* pop(llist* list, int upos);
-void* peek(llist* list, int upos);
+void* pop(llist* list, unsigned int upos);
+void* peek(llist* list, unsigned int upos);
 
 #endif /*__HEADERS_H__*/
