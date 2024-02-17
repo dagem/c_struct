@@ -1,4 +1,4 @@
-#include "../../include/llist.h"
+#include "../include/llist.h"
 
 llist* alloc_llist()
 {
@@ -27,6 +27,7 @@ void free_llist(llist* list)
 	}
 	free(list);
 }
+//traverses the list in O(n) time
 node* traverse(llist* list, int upos)
 {
 	llist accessor_list = *list;
@@ -134,6 +135,15 @@ void insert(llist* list, void* udata,  int upos)
 }
 void* pop(llist* list, int upos)
 {
+	void* removed_data = traverse(list, upos);
+	node* prev_node = traverse(list, upos-1);
+	prev_node->next = traverse(list, upos)->next;
+
+	free(traverse(list,upos));
+
+	traverse(list,upos-2)->next = prev_node;
+	return removed_data;
+
 }
 void update(llist* list, void* udata,  int upos)
 {
