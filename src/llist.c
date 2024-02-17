@@ -135,14 +135,18 @@ void insert(llist* list, void* udata,  int upos)
 }
 void* pop(llist* list, int upos)
 {
-	void* removed_data = traverse(list, upos);
-	node* prev_node = traverse(list, upos-1);
-	prev_node->next = traverse(list, upos)->next;
 
-	free(traverse(list,upos));
+	node old_node = *traverse(list,upos);
+	node* remove_node = traverse(list, upos);
+	node* next_node = old_node.next;
 
-	traverse(list,upos-2)->next = prev_node;
-	return removed_data;
+	free(remove_node);
+
+	traverse(list, upos-1)->next = next_node;
+
+	list->size--;
+
+	return old_node.data;
 
 }
 void update(llist* list, void* udata,  int upos)
