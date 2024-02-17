@@ -19,7 +19,7 @@ typedef struct llist
 }llist;
 
 llist* alloc_llist();
-node*  alloc_node();
+node*  alloc_llnode();
 
 node* traverse(llist* list, unsigned int upos);
 void free_llist(llist* list);

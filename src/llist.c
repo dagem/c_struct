@@ -9,7 +9,7 @@ llist* alloc_llist()
 
 	return new_list;
 }
-node* alloc_node()
+node* alloc_llnode()
 {
 	node* new_node = malloc(sizeof(node));
 
@@ -41,7 +41,7 @@ void prepend(llist* list, void* udata)
 {
 	if(!list->head)
 	{
-		node* new_node = alloc_node();
+		node* new_node = alloc_llnode();
 		new_node->data = udata; //assign udata to head node.
 		new_node->next = NULL;  //make the final node empty
 		list->head = new_node;  //assign to head, 1 node.
@@ -50,7 +50,7 @@ void prepend(llist* list, void* udata)
 	}
 	else if(list->size < 2)
 	{
-		node* new_node = alloc_node();
+		node* new_node = alloc_llnode();
 		new_node->data = udata;
 		new_node->next = list->head;
 
@@ -61,7 +61,7 @@ void prepend(llist* list, void* udata)
 	}
 	else
 	{
-		node* new_node = alloc_node();
+		node* new_node = alloc_llnode();
 		new_node->data = udata;
 		new_node->next = list->head;
 
@@ -77,7 +77,7 @@ void append(llist* list, void* udata)
 	}
 	else if(list->size < 2)
 	{
-		node* new_node = alloc_node();
+		node* new_node = alloc_llnode();
 		new_node->data = udata;
 		new_node->next = NULL;
 
@@ -87,7 +87,7 @@ void append(llist* list, void* udata)
 	}
 	else
 	{
-		node* new_node = alloc_node();
+		node* new_node = alloc_llnode();
 		new_node->data = udata;
 		new_node->next = NULL;
 
@@ -121,7 +121,7 @@ void insert(llist* list, void* udata, unsigned int upos)
 	}
 	else
 	{
-		node* new_node = alloc_node();
+		node* new_node = alloc_llnode();
 		new_node->data = udata;
 
 		new_node->next = traverse(list, upos);
