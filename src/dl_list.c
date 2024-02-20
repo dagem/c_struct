@@ -13,6 +13,26 @@ dl_node* alloc_dl_node()
 	new_node->next = NULL;
 	new_node->prev = NULL;
 }
+dl_node* dl_traverse(dl_list* list, unsigned int pos)
+{
+	dl_list traverse_list = *list;
+	if(pos < list->size/2)
+	{
+		for(unsigned int i = 0; i < pos-1; i++)
+		{
+			traverse_list.head = traverse_list.head->next;
+		}
+		return traverse_list.head->next;
+	}
+	else
+	{
+		for(unsigned int i = traverse_list.size; i > pos+1; i--)
+		{
+			traverse_list.tail = traverse_list.tail->prev;
+		}
+		return traverse_list.tail->prev;
+	}
+}
 void free_dl_list(dl_list* list)
 {
 	dl_node* free_node = NULL;
@@ -68,6 +88,11 @@ void dl_append(dl_list* list, void* udata)
 		dl_node* new_node = alloc_dl_node();
 		new_node->data = udata;
 		new_node->prev = list->tail;
-		//write traverse method
+		list->head->next = new_node;
+		list->tail = new_node;
+		list->size++;
+	}
+	else
+	{
 	}
 }
