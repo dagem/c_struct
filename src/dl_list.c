@@ -1,21 +1,21 @@
-#include "../include/dllist.h"
+#include "../include/dl_list.h"
 
-dllist* alloc_dllist()
+dl_list* alloc_dl_list()
 {
-	dllist* list = malloc(sizeof(dllist));
+	dl_list* list = malloc(sizeof(dl_list));
 	list->tail = NULL;
 	list->head = NULL;
 	list->size = -1;
 }
-node* alloc_dlnode()
+dl_node* alloc_dl_node()
 {
-	node* new_node = malloc(sizeof(node));
+	dl_node* new_node = malloc(sizeof(dl_node));
 	new_node->next = NULL;
 	new_node->prev = NULL;
 }
-void free_dllist(dllist* list)
+void free_dl_list(dl_list* list)
 {
-	node* free_node = NULL;
+	dl_node* free_node = NULL;
 	while(list->head)
 	{
 		free_node = list->head->next;
@@ -24,11 +24,11 @@ void free_dllist(dllist* list)
 	}
 	free(list);
 }
-void prepend(dllist* list, void* udata)
+void dl_prepend(dl_list* list, void* udata)
 {
 	if(!list->head)
 	{
-		node* new_node = alloc_dlnode();
+		dl_node* new_node = alloc_dl_node();
 		new_node->data = udata;
 
 		list->head = new_node;
@@ -37,7 +37,7 @@ void prepend(dllist* list, void* udata)
 	}
 	else if(list->size < 1)
 	{
-		node* new_node = alloc_dlnode();
+		dl_node* new_node = alloc_dl_node();
 		new_node->data = udata;
 		new_node->next = list->head;
 
@@ -48,7 +48,7 @@ void prepend(dllist* list, void* udata)
 	}
 	else
 	{
-		node* new_node = alloc_dlnode();
+		dl_node* new_node = alloc_dl_node();
 		new_node->data = udata;
 		list->head->prev = new_node;
 		new_node->next = list->head;
@@ -57,15 +57,15 @@ void prepend(dllist* list, void* udata)
 		list->size++;
 	}
 }
-void append(dllist* list, void* udata)
+void dl_append(dl_list* list, void* udata)
 {
 	if(!list->head)
 	{
-		prepend(list, udata);
+		dl_prepend(list, udata);
 	}
 	else if(list->size < 2)
 	{
-		node* new_node = alloc_dllnode();
+		dl_node* new_node = alloc_dl_node();
 		new_node->data = udata;
 		new_node->prev = list->tail;
 		//write traverse method
