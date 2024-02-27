@@ -17,7 +17,6 @@ typedef struct sl_list
 	sl_node* tail;
 	int size;
 }sl_list;
-
 sl_list* alloc_sl_list();
 sl_node*  alloc_llnode();
 

@@ -5,18 +5,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-typedef struct node{
+typedef struct st_node{
 	void *data;
-	struct node* prev;
-}node;
+	struct st_node* prev;
+}st_node;
 
 typedef struct stack{
-	node* top;
+	st_node* top;
 	int size;
 }stack;
 
 stack* alloc_stack();
-node*  alloc_node();
+st_node*  alloc_st_node();
 
 void* pop(stack* st);
 void* peek(stack* st);
