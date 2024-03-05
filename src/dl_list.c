@@ -94,5 +94,9 @@ void dl_append(dl_list* list, void* udata)
 	}
 	else
 	{
+		//dl_node* new_node = alloc_dl_node();
+		//new_node->data = udata;
+		//new_node-> prev = list->tail;
+		//traverse
 	}
 }
