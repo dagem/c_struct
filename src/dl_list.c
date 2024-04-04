@@ -2,16 +2,20 @@
 
 dl_list* alloc_dl_list()
 {
-	dl_list* list = malloc(sizeof(dl_list));
-	list->tail = NULL;
-	list->head = NULL;
-	list->size = -1;
+    dl_list* list = malloc(sizeof(dl_list));
+    list->tail = NULL;
+    list->head = NULL;
+    list->size = -1;
+
+    return list;
 }
 dl_node* alloc_dl_node()
 {
-	dl_node* new_node = malloc(sizeof(dl_node));
-	new_node->next = NULL;
-	new_node->prev = NULL;
+    dl_node* new_node = malloc(sizeof(dl_node));
+    new_node->next = NULL;
+    new_node->prev = NULL;
+
+    return new_node;
 }
 dl_node* dl_traverse(dl_list* list, unsigned int pos)
 {
@@ -92,11 +96,24 @@ void dl_append(dl_list* list, void* udata)
 		list->tail = new_node;
 		list->size++;
 	}
-	else
-	{
-		//dl_node* new_node = alloc_dl_node();
-		//new_node->data = udata;
-		//new_node-> prev = list->tail;
-		//traverse
-	}
+    else
+    {
+        dl_node* new_node = alloc_dl_node();
+        new_node->data = udata;
+        new_node->prev = list->tail;
+        list->tail->next = new_node;
+        list->tail = list->tail->next;
+        list->size++;
+    }
+}
+void dl_insert(dl_list* list, void* udata, unsigned int pos)
+{
+    if(list->size < 1)
+        dl_prepend(list, udata);
+    else if(list->size < 2)
+        dl_append(list, udata);
+    else
+    {
+
+    }
 }

@@ -23,11 +23,10 @@ dl_node* alloc_dl_node();
 
 void dl_prepend(dl_list* list, void* udata);
 void dl_append(dl_list* list, void* udata);
-void dl_insert(dl_list* list, void* udata);
+void dl_insert(dl_list* list, void* udata, unsigned int pos);
 void* dl_pop(dl_list* list, unsigned int pos);
 void dl_update(dl_list* list, void* udata, unsigned int pos);
-dl_node* dl_forward(dl_list* list, unsigned int pos);
-dl_node* dl_backward(dl_list* list, unsigned int pos);
+dl_node* dl_traverse(dl_list* list, unsigned int pos);
 
 void free_dl_list(dl_list* list);
 
