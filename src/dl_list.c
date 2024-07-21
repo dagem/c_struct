@@ -96,15 +96,15 @@ void dl_append(dl_list* list, void* udata)
 		list->tail = new_node;
 		list->size++;
 	}
-    else
-    {
+	else
+  {
         dl_node* new_node = alloc_dl_node();
         new_node->data = udata;
         new_node->prev = list->tail;
         list->tail->next = new_node;
         list->tail = list->tail->next;
         list->size++;
-    }
+   }
 }
 void dl_insert(dl_list* list, void* udata, unsigned int pos)
 {
@@ -114,6 +114,6 @@ void dl_insert(dl_list* list, void* udata, unsigned int pos)
         dl_append(list, udata);
     else
     {
-
+    	
     }
 }
